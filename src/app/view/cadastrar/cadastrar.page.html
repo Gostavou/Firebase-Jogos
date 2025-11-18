@@ -1,0 +1,94 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cadastrar Jogo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding dark-bg">
+  <form #jogoForm="ngForm" (ngSubmit)="salvarJogo(jogoForm)">
+
+    <ion-list class="form-list">
+
+      <ion-item>
+        <ion-label position="stacked">Nome do Jogo <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input type="text" name="nome" ngModel required placeholder="Ex: Assassin's Creed Black Flag"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Desenvolvedora <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input type="text" name="desenvolvedora" ngModel required placeholder="Ex: Ubisoft"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Ano de Lançamento <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input 
+          type="number" 
+          name="lancamento" 
+          ngModel 
+          required 
+          [min]="anoMinimo" 
+          [max]="anoMaximo"
+          placeholder="Ex: 2013">
+        </ion-input>
+      </ion-item>
+      
+
+      <div class="chip-section">
+        <ion-label>Gêneros <ion-text color="danger">*</ion-text></ion-label>
+        <div class="chips">
+          <ion-chip *ngFor="let g of generos; let i = index" color="primary">
+            {{ g }}
+            <ion-icon name="close-circle" (click)="removeGenero(i)"></ion-icon>
+          </ion-chip>
+        </div>
+        <ion-item>
+          <ion-select [(ngModel)]="generoSelecionado" name="generoSelect" (ionChange)="addGenero()" placeholder="Adicionar gênero">
+            <ion-select-option value="Ação">Ação</ion-select-option>
+            <ion-select-option value="Aventura">Aventura</ion-select-option>
+            <ion-select-option value="RPG">RPG</ion-select-option>
+            <ion-select-option value="Estratégia">Estratégia</ion-select-option>
+            <ion-select-option value="Esportes">Esportes</ion-select-option>
+            <ion-select-option value="Corrida">Corrida</ion-select-option>
+            <ion-select-option value="FPS">FPS</ion-select-option>
+            <ion-select-option value="Terror">Terror</ion-select-option>
+            <ion-select-option value="Indie">Indie</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+
+      <div class="chip-section">
+        <ion-label>Plataformas <ion-text color="danger">*</ion-text></ion-label>
+        <div class="chips">
+          <ion-chip *ngFor="let p of plataformas; let i = index" color="primary">
+            {{ p }}
+            <ion-icon name="close-circle" (click)="removePlataforma(i)"></ion-icon>
+          </ion-chip>
+        </div>
+        <ion-item>
+          <ion-select [(ngModel)]="plataformaSelecionada" name="plataformaSelect" (ionChange)="addPlataforma()" placeholder="Adicionar plataforma">
+            <ion-select-option value="PC">PC</ion-select-option>
+            <ion-select-option value="PlayStation 5">PlayStation 5</ion-select-option>
+            <ion-select-option value="PlayStation 4">PlayStation 4</ion-select-option>
+            <ion-select-option value="Xbox Series X/S">Xbox Series X/S</ion-select-option>
+            <ion-select-option value="Xbox One">Xbox One</ion-select-option>
+            <ion-select-option value="Nintendo Switch">Nintendo Switch</ion-select-option>
+            <ion-select-option value="Mobile">Mobile</ion-select-option>
+            <ion-select-option value="Multiplataforma">Multiplataforma</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button type="submit" expand="block" color="primary" [disabled]="!jogoForm.valid || generos.length === 0 || plataformas.length === 0">
+        Salvar Jogo
+      </ion-button>
+      
+      
+    </div>
+  </form>
+</ion-content>

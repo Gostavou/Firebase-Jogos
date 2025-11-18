@@ -1,0 +1,40 @@
+<ion-content class="page">
+  <div class="container">
+    <h1 class="title">Entrar</h1>
+    <p class="subtitle">Crie e organize sua coleção de jogos </p>
+    
+    <form [formGroup]="form" class="form">
+      <ion-input
+        formControlName="email"
+        type="email"
+        placeholder="Email"
+        class="input">
+      </ion-input>
+
+      <div class="password-container">
+        <ion-input
+          formControlName="senha"
+          [type]="showPassword ? 'text' : 'password'"
+          placeholder="Senha"
+          class="input">
+        </ion-input>
+        <ion-button fill="clear" class="toggle-password" (click)="togglePassword()">
+          <ion-icon [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+        </ion-button>
+      </div>
+
+      <ion-button
+        expand="block"
+        class="login-btn"
+        (click)="logar()"
+        [disabled]="form.invalid">
+        Entrar
+      </ion-button>
+
+      <div class="link-text">
+        não possui uma conta?
+        <a routerLink="/registrar">Registrar</a>
+      </div>
+    </form>
+  </div>
+</ion-content>

@@ -1,0 +1,7 @@
+{
+  "name": "Jogos",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
